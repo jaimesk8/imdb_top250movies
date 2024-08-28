@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const puppeteer = require('puppeteer');
+const fs = require('fs');
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
@@ -24,6 +25,10 @@ app.use(express.json());
       });
     });
 
+    // Save the data to a JSON file in the project folder
+    fs.writeFileSync('data.json', JSON.stringify(maps_data, null, 2), 'utf-8');
+    console.log('Data saved to data.json');
+    
     console.log("Final data", maps_data);
     await browser.close();
 
